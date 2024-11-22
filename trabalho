@@ -1,0 +1,120 @@
+npm install @react-navigation/native
+npm install @react-navigation/stack
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+\\App.js\\
+
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+import LoginScreen from './screens/LoginScreen';
+import ProductScreen from './screens/ProductScreen';
+import SalesScreen from './screens/SalesScreen';
+import StockScreen from './screens/StockScreen';
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Products" component={ProductScreen} />
+        <Stack.Screen name="Sales" component={SalesScreen} />
+        <Stack.Screen name="Stock" component={StockScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+\\Criando Logintela.js em tela
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+
+export default function LoginScreen({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    // Lógica de autenticação
+    navigation.replace('Home');
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Login</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Senha"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <Button title="Entrar" onPress={handleLogin} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 15,
+  },
+  title: {
+    fontSize: 26,
+    marginBottom: 18,
+    textAlign: 'center',
+  },
+  input: {
+    height: 35,
+    borderColor: 'red',
+    borderWidth: 1,
+    marginBottom: 10,
+    padding: 8,
+  },
+});
+
+\\Criando telaprincipal.js em tela
+
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+
+export default function HomeScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Controle de Vendas e Estoque</Text>
+      <Button title="Vendas" onPress={() => navigation.navigate('Sales')} />
+      <Button title="Estoque" onPress={() => navigation.navigate('Stock')} />
+      <Button title="Produtos" onPress={() => navigation.navigate('Products')} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 14,
+  },
+  title: {
+    fontSize: 20,
+    marginBottom: 14,
+    textAlign: 'center',
+  },
+});
+
+
+
+
+
+
