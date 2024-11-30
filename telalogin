@@ -1,3 +1,4 @@
+// src/screens/telalogin.js
 import React, { useContext, useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
